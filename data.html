@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ReviewAI — Mock Data</title>
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --panel: #ffffff;
+      --panel-2: #fbfcfe;
+      --text: #111827;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --border-strong: #d7dce5;
+      --shadow: 0 8px 30px rgba(17, 24, 39, 0.06);
+      --shadow-hover: 0 14px 35px rgba(17, 24, 39, 0.10);
+      --primary: #2563eb;
+      --primary-2: #1d4ed8;
+      --success-bg: #ecfdf5;
+      --success-text: #047857;
+      --danger-bg: #fef2f2;
+      --danger-text: #b91c1c;
+      --warning-bg: #fffbeb;
+      --warning-text: #b45309;
+      --radius: 18px;
+      --radius-sm: 12px;
+      --sidebar: #0f172a;
+      --sidebar-2: #111827;
+      --sidebar-text: #dbe3f0;
+      --sidebar-muted: #94a3b8;
+      --focus: 0 0 0 4px rgba(37, 99, 235, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: linear-gradient(180deg, #f8fafc 0%, #f5f7fb 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .app {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      background: linear-gradient(180deg, var(--sidebar) 0%, var(--sidebar-2) 100%);
+      color: #fff;
+      padding: 24px 18px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+      overflow-y: auto;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 10px 18px;
+      margin-bottom: 18px;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #60a5fa 0%, #2563eb 55%, #1d4ed8 100%);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.25);
+      flex-shrink: 0;
+    }
+
+    .brand-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .brand-subtitle {
+      color: var(--sidebar-muted);
+      font-size: 0.85rem;
+      line-height: 1.35;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 14px;
+    }
+
+    .nav-section-label {
+      color: rgba(219, 227, 240, 0.65);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 14px 12px 8px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      color: var(--sidebar-text);
+      transition: transform 180ms ease, background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+      position: relative;
+      outline: none;
+    }
+
+    .nav-link:hover {
+      background: rgba(255, 255, 255, 0.07);
+      color: #fff;
+      transform: translateX(2px);
+    }
+
+    .nav-link:focus-visible {
+      box-shadow: var(--focus);
+    }
+
+    .nav-link.active {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.35), rgba(59, 130, 246, 0.20));
+      color: #fff;
+      box-shadow: inset 0 0 0 1px rgba(147, 197, 253, 0.16);
+    }
+
+    .nav-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      display: inline-grid;
+      place-items: center;
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+
+    .sidebar-footer {
+      margin-top: 24px;
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.05);
+      color: rgba(219, 227, 240, 0.92);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .sidebar-footer strong {
+      display: block;
+      color: #fff;
+      margin-bottom: 4px;
+      font-size: 0.95rem;
+    }
+
+    /* Main */
+    .main {
+      flex: 1;
+      padding: 28px;
+      min-width: 0;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .title-wrap h1 {
+      margin: 0;
+      font-size: clamp(1.55rem, 2vw, 2.2rem);
+      letter-spacing: -0.04em;
+      line-height: 1.15;
+    }
+
+    .title-wrap p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.55;
+      max-width: 860px;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.08);
+      color: var(--primary-2);
+      border: 1px solid rgba(37, 99, 235, 0.12);
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .chip-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.14);
+    }
+
+    .section {
+      margin-bottom: 24px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: 1.05rem;
+      letter-spacing: -0.03em;
+    }
+
+    .section-subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+      border-color: #dbe2ed;
+    }
+
+    .metric {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 120px;
+    }
+
+    .metric-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .metric-value {
+      font-size: 2rem;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      margin-top: 2px;
+    }
+
+    .metric-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: auto;
+    }
+
+    .trend-up {
+      color: #047857;
+      background: var(--success-bg);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.78rem;
+    }
+
+    .trend-down {
+      color: var(--danger-text);
+      background: var(--danger-bg);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.78rem;
+    }
+
+    .trend-flat {
+      color: #0369a1;
+      background: #ecfeff;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.78rem;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .panel-inner {
+      padding: 18px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      min-width: 920px;
+    }
+
+    thead th {
+      text-align: left;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6b7280;
+      padding: 14px 16px;
+      background: #fafbfc;
+      border-bottom: 1px solid var(--border);
+    }
+
+    thead th:first-child {
+      border-top-left-radius: 16px;
+    }
+
+    thead th:last-child {
+      border-top-right-radius: 16px;
+    }
+
+    tbody td {
+      padding: 16px;
+      border-bottom: 1px solid #edf1f6;
+      vertical-align: top;
+      background: #fff;
+      transition: background 160ms ease;
+    }
+
+    tbody tr:hover td {
+      background: #f9fbff;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .review-cell {
+      max-width: 460px;
+    }
+
+    .review-text {
+      margin: 0 0 8px;
+      line-height: 1.6;
+      color: #111827;
+    }
+
+    .review-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .sentiment-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .sentiment-chip.positive {
+      background: var(--success-bg);
+      color: var(--success-text);
+      border-color: rgba(4, 120, 87, 0.12);
+    }
+
+    .sentiment-chip.negative {
+      background: var(--danger-bg);
+      color: var(--danger-text);
+      border-color: rgba(185, 28, 28, 0.12);
+    }
+
+    .sentiment-chip.mixed {
+      background: var(--warning-bg);
+      color: #a16207;
+      border-color: rgba(180, 83, 9, 0.12);
+    }
+
+    .sentiment-chip.neutral {
+      background: #ecfeff;
+      color: #0369a1;
+      border-color: rgba(3, 105, 161, 0.12);
+    }
+
+    .product-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #f3f4f6;
+      color: #374151;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .table-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: #111827;
+      padding: 10px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
+      box-shadow: 0 2px 0 rgba(17, 24, 39, 0.02);
+      font-weight: 600;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      border-color: #cfd7e4;
+      box-shadow: 0 10px 18px rgba(17, 24, 39, 0.06);
+      background: #fcfdff;
+    }
+
+    .button:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .button:focus-visible {
+      outline: none;
+      box-shadow: var(--focus);
+    }
+
+    .button-primary {
+      background: linear-gradient(180deg, #2f6df6 0%, #2563eb 100%);
+      color: #fff;
+      border-color: rgba(37, 99, 235, 0.4);
+    }
+
+    .button-primary:hover {
+      background: linear-gradient(180deg, #2f6df6 0%, #1d4ed8 100%);
+    }
+
+    .button-ghost {
+      background: transparent;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .small-card {
+      padding: 16px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #ffffff, #fafcff);
+      border: 1px solid var(--border);
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+
+    .small-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 24px rgba(17, 24, 39, 0.07);
+      border-color: #dbe2ed;
+    }
+
+    .small-card h3 {
+      margin: 0 0 8px;
+      font-size: 0.98rem;
+      letter-spacing: -0.02em;
+    }
+
+    .small-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.92rem;
+    }
+
+    .insight-box {
+      background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
+      border: 1px solid #dbe7fb;
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(37, 99, 235, 0.06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .insight-box::after {
+      content: "";
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.14), transparent 70%);
+      pointer-events: none;
+    }
+
+    .insight-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.08);
+      color: var(--primary-2);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .insight-title {
+      margin: 0 0 8px;
+      font-size: 1.02rem;
+      letter-spacing: -0.03em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .insight-copy {
+      margin: 0;
+      color: #4b5563;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+
+    .subtle-link {
+      color: var(--primary-2);
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .footer-note {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 6px;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 520ms ease, transform 520ms ease;
+    }
+
+    .fade-in.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stagger-1 { transition-delay: 60ms; }
+    .stagger-2 { transition-delay: 120ms; }
+    .stagger-3 { transition-delay: 180ms; }
+    .stagger-4 { transition-delay: 240ms; }
+    .stagger-5 { transition-delay: 300ms; }
+
+    @media (max-width: 1180px) {
+      .grid-cards,
+      .cards-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 960px) {
+      .app {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+
+      .main {
+        padding: 18px;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .top-actions {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+
+      .grid-cards,
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .main {
+        padding: 14px;
+      }
+
+      .card,
+      .panel-inner {
+        padding: 16px;
+      }
+
+      .metric-value {
+        font-size: 1.7rem;
+      }
+
+      .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app" id="top">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">R</div>
+        <div class="brand-copy">
+          <h2 class="brand-title">ReviewAI</h2>
+          <div class="brand-subtitle">Review analytics for ecommerce brands</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Sidebar navigation">
+        <div class="nav-section-label">Navigation</div>
+
+        <a class="nav-link" href="index.html">
+          <span class="nav-icon">⌂</span>
+          <span>Dashboard</span>
+        </a>
+
+        <a class="nav-link" href="index.html#recent-reviews">
+          <span class="nav-icon">▤</span>
+          <span>All Reviews</span>
+        </a>
+
+        <div class="nav-section-label">Resources</div>
+
+        <a class="nav-link" href="products.html">
+          <span class="nav-icon">◫</span>
+          <span>Products</span>
+        </a>
+
+        <a class="nav-link active" href="data.html">
+          <span class="nav-icon">◌</span>
+          <span>Mock Data</span>
+        </a>
+
+        <a class="nav-link" href="roadmap.html">
+          <span class="nav-icon">→</span>
+          <span>Future Improvements</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <strong>Mock data overview</strong>
+        This page contains the structured example dataset that powers the dashboard wireframe.
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar fade-in show">
+        <div class="title-wrap">
+          <h1>Mock data used in ReviewAI</h1>
+          <p>
+            This page shows the structured review dataset behind the dashboard wireframe. It includes review text,
+            product mapping, sentiment labels, top issues, and AI-style insights that can later be replaced with live data.
+          </p>
+        </div>
+        <div class="top-actions">
+          <div class="chip" title="Example dataset status">
+            <span class="chip-dot"></span>
+            Sample dataset
+          </div>
+          <a class="button button-primary" href="index.html">Back to dashboard</a>
+        </div>
+      </header>
+
+      <section class="section fade-in stagger-1" id="reviews-data">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">Reviews Data</h2>
+            <p class="section-subtitle">A structured sample of 8 reviews across multiple products and platforms.</p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Review</th>
+                  <th>Product</th>
+                  <th>Platform</th>
+                  <th>Rating</th>
+                  <th>Sentiment</th>
+                  <th>Theme</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="review-cell">
+                    <p class="review-text">Delivery was late and the packaging arrived damaged.</p>
+                    <div class="review-meta">
+                      <span>2 hours ago</span>
+                      <span>•</span>
+                      <span>Urgent complaint</span>
+                    </div>
+                  </td>
+                  <td><span class="product-pill">Product A</span></td>
+                  <td>Amazon</td>
+                  <td>2★</td>
+                  <td><span class="sentiment-chip negative">Negative</span></td>
+                  <td>Delivery / Packaging</td>
+                </tr>
+
+                <tr>
+                  <td class="review-cell">
+                    <p class="review-text">Great quality and exactly as described. Will order again.</p>
+                    <div class="review-meta">
+                      <span>4 hours ago</span>
+                      <span>•</span>
+                      <span>Repeat buyer</span>
+                    </div>
+                  </td>
+                  <td><span class="product-pill">Product B</span></td>
+                  <td>Shopify</td>
+                  <td>5★</td>
+                  <td><span class="sentiment-chip positive">Positive</span></td>
+                  <td>Product Quality</td>
+                </tr>
+
+                <tr>
+                  <td class="review-cell">
+                    <p class="review-text">The size seems a bit off, but the material feels good.</p>
+                    <div class="review-meta">
+                      <span>6 hours ago</span>
+                      <span>•</span>
+                      <span>Mixed feedback</span>
+                    </div>
+                  </td>
+                  <td><span class="product-pill">Product C</span></td>
+                  <td>Flipkart</td>
+                  <td>3★</td>
+                  <td><span class="sentiment-chip mixed">Mixed</span></td>
+                  <td>Size / Fit</td>
+                </tr>
+
+                <tr>
+                  <td class="review-cell">
+                    <p class="review-text">Customer support resolved my issue quickly. Appreciate the fast response.</p>
+                    <div class="review-meta">
+                      <span>8 hours ago</span>
+                      <span>•</span>
+                      <span>Support praise</span>
+                    </div>
+                  </td>
+                  <td><span class="product-pill">Support</span></td>
+                  <td>Google</td>
+                  <td>5★</td>
+                  <td><span class="sentiment-chip positive">Positive</span></td>
+                  <td>Customer Service</td>
+                </tr>
+
+                <tr>
+                  <td class="review-cell">
+                    <p class="review-text">Wrong item received. Need a replacement as soon as possible.</p>
+                    <div class="review-meta">
+                      <span>10 hours ago</span>
+                      <span>•</span>
+                      <span>Escalate</span>
+                    </div>
+                  </td>
+                  <td><span class="product-pill">Product A</span></td>
+                  <td>Amazon</td>
+                  <td>1★</td>
+                  <td><span class="sentiment-chip negative">Negative</span></td>
+                  <td>Wrong Item</td>
+                </tr>
+
+                <tr>
+                  <td class="review-cell">
+                    <p class="review-text">I like the product overall, but the color looks slightly different from the photos.</p>
+                    <div class="review-meta">
+                      <span>12 hours ago</span>
+                      <span>•</span>
+                      <span>Expectation gap</span>
+                    </div>
+                  </td>
+                  <td><span class="product-pill">Product B</span></td>
+                  <td>Website</td>
+                  <td>4★</td>
+                  <td><span class="sentiment-chip mixed">Mixed</span></td>
+                  <td>Appearance</td>
+                </tr>
+
+                <tr>
+                  <td class="review-cell">
+                    <p class="review-text">Fast delivery and premium packaging. Very satisfied with this purchase.</p>
+                    <div class="review-meta">
+                      <span>1 day ago</span>
+                      <span>•</span>
+                      <span>Strong praise</span>
+                    </div>
+                  </td>
+                  <td><span class="product-pill">Product C</span></td>
+                  <td>Amazon</td>
+                  <td>5★</td>
+                  <td><span class="sentiment-chip positive">Positive</span></td>
+                  <td>Delivery / Packaging</td>
+                </tr>
+
+                <tr>
+                  <td class="review-cell">
+                    <p class="review-text">The item works fine, but the instructions were hard to understand.</p>
+                    <div class="review-meta">
+                      <span>1 day ago</span>
+                      <span>•</span>
+                      <span>Needs clarity</span>
+                    </div>
+                  </td>
+                  <td><span class="product-pill">Product A</span></td>
+                  <td>Flipkart</td>
+                  <td>3★</td>
+                  <td><span class="sentiment-chip mixed">Mixed</span></td>
+                  <td>Usability</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section fade-in stagger-2">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">Metrics</h2>
+            <p class="section-subtitle">Summary numbers derived from the mock review set.</p>
+          </div>
+        </div>
+
+        <div class="grid-cards">
+          <article class="card metric">
+            <div class="metric-label">
+              <span>Total Reviews</span>
+              <span class="trend-up">8</span>
+            </div>
+            <div class="metric-value">8</div>
+            <div class="metric-meta">Visible sample set in this demo</div>
+          </article>
+
+          <article class="card metric">
+            <div class="metric-label">
+              <span>Positive</span>
+              <span class="trend-up">+3</span>
+            </div>
+            <div class="metric-value">3</div>
+            <div class="metric-meta">Reviews showing praise or success</div>
+          </article>
+
+          <article class="card metric">
+            <div class="metric-label">
+              <span>Negative</span>
+              <span class="trend-down">+2</span>
+            </div>
+            <div class="metric-value">2</div>
+            <div class="metric-meta">Reviews needing quick attention</div>
+          </article>
+
+          <article class="card metric">
+            <div class="metric-label">
+              <span>Mixed</span>
+              <span class="trend-flat">3</span>
+            </div>
+            <div class="metric-value">3</div>
+            <div class="metric-meta">Feedback with praise + concerns</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section fade-in stagger-3" id="top-issues">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">Top Issues</h2>
+            <p class="section-subtitle">The main complaint themes detected in the sample data.</p>
+          </div>
+        </div>
+
+        <div class="cards-grid">
+          <div class="small-card">
+            <h3>Delivery Delay</h3>
+            <p>Appears in multiple negative reviews. This is the strongest operational issue in the dataset.</p>
+          </div>
+
+          <div class="small-card">
+            <h3>Packaging Damage</h3>
+            <p>Visible in both direct complaints and combined negative feedback. Impacts trust quickly.</p>
+          </div>
+
+          <div class="small-card">
+            <h3>Sizing / Fit</h3>
+            <p>Frequent mixed-sentiment issue. Often causes returns or uncertainty before purchase.</p>
+          </div>
+
+          <div class="small-card">
+            <h3>Wrong Item</h3>
+            <p>High urgency complaint that typically requires immediate support escalation.</p>
+          </div>
+
+          <div class="small-card">
+            <h3>Color Mismatch</h3>
+            <p>Expectation gap between product images and received item. Important for conversion quality.</p>
+          </div>
+
+          <div class="small-card">
+            <h3>Instructions / Usability</h3>
+            <p>Not always negative, but can cause friction and reduce first-time satisfaction.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section fade-in stagger-4" id="ai-insights">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">AI Insights</h2>
+            <p class="section-subtitle">A human-readable summary of what this dataset suggests.</p>
+          </div>
+        </div>
+
+        <div class="insight-box">
+          <div class="insight-kicker">AI Summary</div>
+          <h3 class="insight-title">What this sample dataset suggests</h3>
+          <p class="insight-copy">
+            Product quality is generally well received, especially for Product B and the positive delivery experience on Product C.
+            However, Product A shows the strongest risk signal because of delivery delay, damaged packaging, and wrong item complaints.
+            Product C has mixed feedback, mainly related to sizing and usability. If this were live data, the best first action would be
+            to alert operations about fulfillment issues and improve size guidance for customers.
+          </p>
+          <p class="footer-note">
+            Later this box can become auto-generated from real-time review clustering, urgency detection, and platform-level trend analysis.
+          </p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      const navLinks = Array.from(document.querySelectorAll(".nav-link"));
+      const fadeEls = document.querySelectorAll(".fade-in");
+
+      // Highlight active page link
+      navLinks.forEach((link) => {
+        const href = link.getAttribute("href") || "";
+
+        if (href === "data.html") {
+          link.classList.add("active");
+        }
+
+        link.addEventListener("click", (e) => {
+          if (href.startsWith("#")) {
+            const target = document.querySelector(href);
+            if (target) {
+              e.preventDefault();
+              target.scrollIntoView({ behavior: "smooth", block: "start" });
+              history.replaceState(null, "", href);
+            }
+          }
+        });
+      });
+
+      // Smooth fade-in entrance
+      requestAnimationFrame(() => {
+        fadeEls.forEach((el, index) => {
+          setTimeout(() => el.classList.add("show"), Math.min(index * 80, 320));
+        });
+      });
+
+      // Small click feedback for buttons
+      document.querySelectorAll(".button").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          btn.animate(
+            [
+              { transform: "scale(1)" },
+              { transform: "scale(0.98)" },
+              { transform: "scale(1)" }
+            ],
+            { duration: 180, easing: "ease-out" }
+          );
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
